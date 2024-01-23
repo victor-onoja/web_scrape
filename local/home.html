@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+    <title>Trivia!</title>
+    <script>
+      function checkMultipleChoiceAnswer(selectedButton) {
+        // Define the correct answer
+        const correctAnswer = "B";
+
+        // Get all answer buttons
+        const answerButtons = document.querySelectorAll(
+          ".multiple-choice-button"
+        );
+
+        // Disable all buttons to prevent further clicks
+        answerButtons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        if (selectedButton.value === correctAnswer) {
+          // Correct answer selected
+          selectedButton.classList.add("correct");
+          document.getElementById("multiple-choice-result").textContent =
+            "Correct!";
+        } else {
+          // Incorrect answer selected
+          selectedButton.classList.add("incorrect");
+          document.getElementById("multiple-choice-result").textContent =
+            "Incorrect";
+        }
+      }
+
+      function checkFreeResponseAnswer() {
+        // Define the correct answer
+        const correctAnswer = "four";
+
+        const responseField = document.getElementById("free-response-field");
+        const resultMessage = document.getElementById("free-response-result");
+
+        // Disable the input field and the confirmation button
+        responseField.disabled = true;
+        document.getElementById("free-response-button").disabled = true;
+
+        if (responseField.value === correctAnswer) {
+          // Correct answer typed
+          responseField.classList.add("correct");
+          resultMessage.textContent = "Correct!";
+        } else {
+          // Incorrect answer typed
+          responseField.classList.add("incorrect");
+          resultMessage.textContent = "Incorrect";
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="header">
+      <h1>Trivia!</h1>
+    </div>
+
+    <div class="container">
+      <div class="section">
+        <h2>Part 1: Multiple Choice</h2>
+        <hr />
+        <h3>What is the capital of France?</h3>
+        <button
+          class="multiple-choice-button"
+          value="A"
+          onclick="checkMultipleChoiceAnswer(this)"
+        >
+          A. Berlin
+        </button>
+        <button
+          class="multiple-choice-button"
+          value="B"
+          onclick="checkMultipleChoiceAnswer(this)"
+        >
+          B. Paris
+        </button>
+        <button
+          class="multiple-choice-button"
+          value="C"
+          onclick="checkMultipleChoiceAnswer(this)"
+        >
+          C. Madrid
+        </button>
+        <p id="multiple-choice-result"></p>
+      </div>
+
+      <div class="section">
+        <h2>Part 2: Free Response</h2>
+        <hr />
+        <h3>What is 2 + 2?</h3>
+        <input type="text" id="free-response-field" />
+        <button id="free-response-button" onclick="checkFreeResponseAnswer()">
+          Submit
+        </button>
+        <p id="free-response-result"></p>
+      </div>
+    </div>
+  </body>
+</html>
